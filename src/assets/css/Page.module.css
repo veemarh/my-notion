@@ -1,0 +1,85 @@
+.pageOuter {
+    position: relative;
+    height: 100vh;
+    background-color: initial;
+    overflow: hidden;
+}
+
+.pageInner {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: black;
+    background-color: white;
+    fill: currentcolor;
+    transition: height 0.1s;
+}
+
+.cursorListener {
+    position: relative;
+    display: flex;
+    width: 100vw;
+    height: 100%;
+    background-color: white;
+    /*cursor: text;*/
+}
+
+.mainWorkspace {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+    /*isolation: auto;*/
+}
+
+.header {
+    display: flex;
+    height: 52px;
+    max-width: 100vw;
+    padding: 0 1em;
+    align-items: center;
+
+    background: white;
+    user-select: none;
+}
+
+.navbarToggleSection {
+    margin-right: 2em;
+}
+
+.navbarPathSection {
+    display: flex;
+    flex-grow: 2;
+}
+
+.navbarToolsSection {
+
+}
+
+.main {
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    z-index: 1;
+    height: calc(-52px + 100vh);
+    max-height: 100%;
+    position: relative;
+}
+
+.mainContent {
+    display: contents;
+}
+
+.mainContentInner {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+    align-items: center;
+    overflow: hidden auto;
+}
