@@ -9,33 +9,33 @@ export default function SideEdgeMouseZone() {
     const {
         isFixed,
         isPreviewed,
-        handleMouseEnter,
-        handleMouseZoneLeave,
+        handleMouseZoneEnter,
+        handleMouseZoneLeave: handleMouseZoneLeave,
         zoneRef,
         menuRef
     } = useContext(SideMenubarContext);
-    const sideEdgeMouseZoneClass = isFixed
-        ? styles.sideEdgeMouseZoneFixed
-        : styles.sideEdgeMouseZone;
+    const mouseZoneClass = isFixed
+        ? styles.mouseZoneFixed
+        : styles.mouseZone;
 
     return (
         <div ref={zoneRef}
-             className={sideEdgeMouseZoneClass}
-             onMouseEnter={handleMouseEnter}
+             className={mouseZoneClass}
+             onMouseEnter={handleMouseZoneEnter}
              onMouseLeave={handleMouseZoneLeave}
         >
             <SideMenubar isFixed={isFixed}>
-                <div className={styles.fontStyles}>
-                    <div className={styles.sideMenubarForDnD}>
+                <div className={styles.fonts}>
+                    <div className={styles.forDnD}>
                         <SideMenubarInner isFixed={isFixed}
                                           isPreviewed={isPreviewed}
                         >
-                            <div className={styles.sideMenubarInnerStyle}/>
-                            <div className={styles.sideMenubarContent}>
+                            <div className={styles.style}/>
+                            <div className={styles.content}>
                                 <SideMenubarBlocks username={"Veta"}>Content</SideMenubarBlocks>
                             </div>
-                            <div className={styles.sideMenubarDnDBorder} ref={menuRef}>
-                                <div className={styles.sideMenubarDnDBorderHear}/>
+                            <div className={styles.borderDnD} ref={menuRef}>
+                                <div className={styles.hearDnD}/>
                             </div>
                         </SideMenubarInner>
                     </div>

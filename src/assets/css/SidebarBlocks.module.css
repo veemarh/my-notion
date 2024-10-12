@@ -1,11 +1,6 @@
-.header,
-.settingsList {
+.outside {
     flex-grow: 0;
     flex-shrink: 0;
-}
-
-.userBlock {
-    padding: 0.25em 0.5em;
 }
 
 .divider {
@@ -29,7 +24,7 @@
     cursor: pointer;
 }
 
-.blockItemOuter {
+.itemOuter {
     display: flex;
     user-select: none;
     transition: background-color 0.2s;
@@ -38,19 +33,19 @@
     border-radius: 0.5em;
 }
 
-.blockItemOuter:hover {
+.itemOuter:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.blockItemOuterHeader {
-    composes: blockItemOuter;
+.itemOuterOutside {
+    composes: itemOuter;
     min-width: 0;
     width: auto;
     margin: 0.5em;
     align-items: center;
 }
 
-.blockItemInner {
+.itemInner {
     display: flex;
     width: 100%;
     min-height: 2em;

@@ -11,7 +11,7 @@ export function useMenu(isFixed, isPreviewed, setIsFixed, setIsPreviewed) {
         setIsFixed((prev) => !prev);
     };
 
-    const handleMouseEnter = () => {
+    const handleMouseZoneEnter = () => {
         if (!isFixed && !isPreviewed) {
             setIsPreviewed(true);
         }
@@ -49,7 +49,7 @@ export function useMenu(isFixed, isPreviewed, setIsFixed, setIsPreviewed) {
 
     return {
         toggleMenuFix,
-        handleMouseEnter,
+        handleMouseZoneEnter,
         handleMouseZoneLeave,
         toggleRef,
         zoneRef,
