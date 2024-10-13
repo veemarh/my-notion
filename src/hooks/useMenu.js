@@ -24,18 +24,18 @@ export function useMenu(isFixed, isPreviewed, setIsFixed, setIsPreviewed) {
         }
     };
 
-    const handleMouseMove = (e) => {
-        if (isMouseLeaving) {
-            const menuRect = menuRef.current.getBoundingClientRect();
-
-            if (e.clientX > menuRect.right || e.clientY > menuRect.bottom + 50) {
-                setIsPreviewed(false);
-                setIsMouseLeaving(false);
-            }
-        }
-    };
-
     useEffect(() => {
+        const handleMouseMove = (e) => {
+            if (isMouseLeaving) {
+                const menuRect = menuRef.current.getBoundingClientRect();
+
+                if (e.clientX > menuRect.right || e.clientY > menuRect.bottom + 50) {
+                    setIsPreviewed(false);
+                    setIsMouseLeaving(false);
+                }
+            }
+        };
+
         if (isMouseLeaving) {
             document.addEventListener('mousemove', handleMouseMove);
         } else {
@@ -45,7 +45,7 @@ export function useMenu(isFixed, isPreviewed, setIsFixed, setIsPreviewed) {
         return () => {
             document.removeEventListener('mousemove', handleMouseMove);
         };
-    }, [handleMouseMove, isMouseLeaving]);
+    }, [isMouseLeaving, setIsPreviewed]);
 
     return {
         toggleMenuFix,
