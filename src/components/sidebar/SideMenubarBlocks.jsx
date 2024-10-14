@@ -3,7 +3,8 @@ import styles from '../../assets/css/SidebarBlocks.module.css'
 import BarToggle from './BarToggle.jsx';
 import {SideMenubarContext} from '../../contexts/SideMenubarContext';
 import SideMenubarItems from './SideMenubarItems.jsx';
-import Scroller from '../scroller/scroller.jsx';
+import Scroller from '../scroller/Scroller.jsx';
+import {DraggableTypes} from '../Draggable/DraggableTypes.js';
 
 export default function SideMenubarBlocks({username}) {
     const {isFixed} = useContext(SideMenubarContext);
@@ -29,8 +30,8 @@ export default function SideMenubarBlocks({username}) {
             <hr className={styles.divider}/>
 
             <Scroller>
-                <SideMenubarItems items={pages}/>
-                <SideMenubarItems items={settings}/>
+                <SideMenubarItems list={PAGES} type={DraggableTypes.PAGE}/>
+                <SideMenubarItems list={SETTINGS} type={DraggableTypes.SETTINGS}/>
             </Scroller>
 
             <hr className={styles.divider}/>
@@ -53,7 +54,7 @@ export default function SideMenubarBlocks({username}) {
     )
 }
 
-const pages = [{
+const PAGES = [{
     id: 0,
     name: "The very first and very long page",
     icon: <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +88,7 @@ const pages = [{
     href: "/"
 }];
 
-const settings = [{
+const SETTINGS = [{
     id: 0,
     name: "Settings",
     icon: <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
