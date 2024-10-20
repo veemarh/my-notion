@@ -4,7 +4,6 @@ import BarToggle from './BarToggle.jsx';
 import {SideMenubarContext} from '../../contexts/SideMenubarContext';
 import SideMenubarItems from './SideMenubarItems.jsx';
 import Scroller from '../scroller/Scroller.jsx';
-import {DraggableTypes} from '../Draggable/DraggableTypes.js';
 
 export default function SideMenubarBlocks({username}) {
     const {isFixed} = useContext(SideMenubarContext);
@@ -30,8 +29,8 @@ export default function SideMenubarBlocks({username}) {
             <hr className={styles.divider}/>
 
             <Scroller>
-                <SideMenubarItems list={PAGES} type={DraggableTypes.PAGE}/>
-                <SideMenubarItems list={SETTINGS} type={DraggableTypes.SETTINGS}/>
+                <SideMenubarItems items={PAGES}/>
+                <SideMenubarItems items={SETTINGS}/>
             </Scroller>
 
             <hr className={styles.divider}/>
