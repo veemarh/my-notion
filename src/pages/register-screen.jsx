@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
-function LoginScreen() {
+function RegisterScreen() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -9,7 +9,7 @@ function LoginScreen() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:5000/api/auth/login', {
+        const response = await fetch('http://localhost:5000/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ function LoginScreen() {
 
     return (
         <div>
-            <h2>Вход в систему</h2>
+            <h2>Регистрация</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="username">Имя пользователя:</label>
@@ -43,13 +43,13 @@ function LoginScreen() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button type="submit">Войти</button>
+                <button type="submit">Зарегистрироваться</button>
             </form>
             <p>{message}</p>
-            <p>Ты здесь впервые? <Link to="/register">Зарегистрируйся</Link>!</p>
+            <p>Есть аккаунт? Ты можешь <Link to="/login">войти в систему</Link></p>
             <Link to="/">Вернуться на главную</Link>
         </div>
     );
 }
 
-export default LoginScreen;
+export default RegisterScreen;
