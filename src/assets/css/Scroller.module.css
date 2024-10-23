@@ -5,6 +5,15 @@
     overflow: hidden auto;
 }
 
+.workspaceScroller {
+    composes: scroller;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+}
+
 .inner {
     display: flex;
     flex-direction: column;

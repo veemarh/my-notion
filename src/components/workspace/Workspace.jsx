@@ -3,7 +3,8 @@ import styles from '../../assets/css/Page.module.css';
 import NavLinks from '../header/NavLinks.jsx';
 import BarToggle from '../sidebar/BarToggle.jsx';
 import {SideMenubarContext} from '../../contexts/SideMenubarContext';
-import {Link} from 'react-router-dom';
+import Scroller from '../scroller/Scroller.jsx';
+import Contents from './Contents.jsx';
 
 export default function Workspace({pages}) {
     const {isFixed} = useContext(SideMenubarContext);
@@ -25,12 +26,20 @@ export default function Workspace({pages}) {
             </header>
             <main className={styles.main}>
                 <div className={styles.mainContent}>
-                    <div className={styles.mainContentInner}>
-                        <Link to="/login">login</Link>
-                        <Link to="*">404</Link>
-                    </div>
+                    <Scroller workspace={true}>
+                        <div className={styles.textArea}>
+                            <div className={styles.grid}>
+                                <div className={styles.gridContentTitle}>
+                                    <h1>Title</h1>
+                                </div>
+                                <div className={styles.gridContentMain}>
+                                    <Contents/>
+                                </div>
+                            </div>
+                        </div>
+                    </Scroller>
                 </div>
             </main>
         </div>
-    );
+    )
 };
