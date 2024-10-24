@@ -99,3 +99,9 @@
     composes: gridContent;
     padding-top: 0.5em;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}

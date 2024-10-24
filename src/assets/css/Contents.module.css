@@ -1,4 +1,86 @@
-.container {
-    display: flex;
-    flex-direction: column;
+.blockWrapper {
+    max-width: 100%;
+    width: 100%;
 }
+
+[contentEditable=true] {
+    outline: none;
+}
+
+[contentEditable=true]:before {
+    content: attr(placeholder);
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s;
+}
+
+[data-empty=false]:before {
+    transition: 0s;
+}
+
+[data-empty=true]:hover:before {
+    opacity: 0.1;
+    visibility: visible;
+}
+
+[data-empty=true]:focus:before {
+    opacity: 0.5;
+    visibility: visible;
+}
+
+.header {
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+}
+
+.subHeader {
+    margin-top: 1.5em;
+}
+
+.subSubHeader {
+    margin-top: 1.25em;
+}
+
+.link {
+    text-decoration: underline;
+}
+
+.flexWrapper {
+    display: flex;
+    color: inherit;
+}
+
+.textItem {
+    max-width: 100%;
+    width: 100%;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 0.25rem;
+}
+
+.headerItem {
+    composes: textItem;
+    font-weight: 600;
+    font-size: 2em;
+}
+
+.subHeaderItem {
+    composes: textItem;
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+.subSubHeaderItem {
+    composes: textItem;
+    font-weight: 600;
+    font-size: 1.25em;
+}
+
+.linkItem {
+    composes: textItem;
+    border-radius: 0.5em;
+    background-color: gainsboro;
+}
+
