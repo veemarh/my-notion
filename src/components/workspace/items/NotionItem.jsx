@@ -1,5 +1,5 @@
 import styles from '../../../assets/css/Contents.module.css';
-import {renderItem} from './renderItem.jsx';
+import RenderedItem from './RenderedItem.jsx';
 import {useState} from 'react';
 
 export default function NotionItem({type, content}) {
@@ -10,7 +10,7 @@ export default function NotionItem({type, content}) {
     return (
         <div className={`${styles.blockWrapper} ${styles[itemType] || styles.common}`}>
             <div className={styles.flexWrapper} data-empty={isEmpty}>
-                {renderItem(itemType, itemContent, setItemContent)}
+                <RenderedItem itemType={itemType} itemContent={itemContent} setItemContent={setItemContent}/>
             </div>
         </div>
     )

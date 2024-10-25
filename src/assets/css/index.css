@@ -9,7 +9,6 @@
 * {
     border: 0;
     /*font: inherit;*/
-    font-size: 14px;
     vertical-align: baseline;
 }
 
@@ -17,6 +16,7 @@ html {
     scrollbar-width: thin;
     scrollbar-gutter: stable;
     scrollbar-color: #D3D1CB rgba(0, 0, 0, 0);
+    font-size: 14px;
 }
 
 article, aside, details, figcaption, figure,

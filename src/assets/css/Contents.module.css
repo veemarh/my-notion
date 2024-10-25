@@ -49,7 +49,7 @@
 }
 
 .link {
-    text-decoration: underline;
+    margin: 0; /* вот это убрать потом */
 }
 
 .flexWrapper {
@@ -89,3 +89,21 @@
     background-color: gainsboro;
 }
 
+.editMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 0.5em;
+    box-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px, rgba(0, 0, 0, 0.024) -1px 0 0 0 inset;
+    border-radius: 1em;
+    transform-origin: 0 0;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: none;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.editMenuItem {
+    pointer-events: auto;
+    cursor: pointer;
+}
