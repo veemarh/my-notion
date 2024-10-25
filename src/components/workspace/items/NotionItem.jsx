@@ -5,10 +5,11 @@ import {useState} from 'react';
 export default function NotionItem({type, content}) {
     const [itemType, setItemType] = useState(type);
     const [itemContent, setItemContent] = useState(content);
+    const isEmpty = itemContent === "<br>" || itemContent === "";
 
     return (
-        <div className={`${styles.blockWrapper} ${styles[itemType]}`}>
-            <div className={styles.flexWrapper}>
+        <div className={`${styles.blockWrapper} ${styles[itemType] || styles.common}`}>
+            <div className={styles.flexWrapper} data-empty={isEmpty}>
                 {renderItem(itemType, itemContent, setItemContent)}
             </div>
         </div>

@@ -1,18 +1,8 @@
 import ContentEditable from 'react-contenteditable';
-import {useEffect, useRef} from 'react';
 
 export function TextItem({html, className, onChange}) {
-    const ref = useRef(null);
-    const isEmpty = html === "<br>" || html === "";
-    useEffect(() => {
-        if (ref.current) {
-            ref.current.setAttribute("data-empty", isEmpty);
-        }
-    }, [isEmpty, html]);
-
     return (
         <ContentEditable
-            innerRef={ref}
             html={html}
             className={className}
             onChange={onChange}
@@ -29,6 +19,7 @@ export function HeaderItem({html, className, onChange}) {
             className={className}
             onChange={onChange}
             tagName="h2"
+            placeholder="Heading 1"
         />
     );
 }
@@ -40,6 +31,7 @@ export function SubHeaderItem({html, className, onChange}) {
             className={className}
             onChange={onChange}
             tagName="h3"
+            placeholder="Heading 2"
         />
     );
 }
@@ -51,6 +43,7 @@ export function SubSubHeaderItem({html, className, onChange}) {
             className={className}
             onChange={onChange}
             tagName="h4"
+            placeholder="Heading 3"
         />
     );
 }
@@ -62,6 +55,7 @@ export function LinkItem({html, className, onChange}) {
             className={className}
             onChange={onChange}
             tagName="a"
+            placeholder="Type your link there..."
         />
     );
 }

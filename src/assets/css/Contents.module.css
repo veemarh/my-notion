@@ -3,30 +3,35 @@
     width: 100%;
 }
 
-[contentEditable=true] {
+[contentEditable] {
     outline: none;
 }
 
-[contentEditable=true]:before {
+[contentEditable]:before {
     content: attr(placeholder);
     position: absolute;
     pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 0.3;
     transition: 0.2s;
 }
 
-[data-empty=false]:before {
+[data-empty=false] [contentEditable]:before {
     transition: 0s;
 }
 
-[data-empty=true]:hover:before {
-    opacity: 0.1;
+[data-empty=false] [contentEditable]:before,
+.common [data-empty=true] [contentEditable]:before {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.common [data-empty=true] [contentEditable]:hover:before {
+    opacity: 0.15;
     visibility: visible;
 }
 
-[data-empty=true]:focus:before {
-    opacity: 0.5;
+.common [data-empty=true] [contentEditable]:focus:before {
+    opacity: 0.3;
     visibility: visible;
 }
 

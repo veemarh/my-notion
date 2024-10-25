@@ -68,6 +68,7 @@
     height: calc(-44px + 100vh);
     max-height: 100%;
     position: relative;
+    cursor: text;
 }
 
 .mainContent {

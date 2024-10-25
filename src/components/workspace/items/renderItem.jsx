@@ -1,7 +1,5 @@
-import sanitizeHtml from 'sanitize-html'
 import styles from '../../../assets/css/Contents.module.css';
 import {HeaderItem, LinkItem, SubHeaderItem, SubSubHeaderItem, TextItem} from './Items.jsx';
-import {useCallback} from 'react';
 
 export const renderItem = (itemType, itemContent, setItemContent) => {
     // const onContentChange = useCallback(evt => {
