@@ -26,19 +26,17 @@ export default function SideEdgeMouseZone() {
         >
             <SideMenubar isFixed={isFixed}>
                 <div className={styles.fonts}>
-                    <div className={styles.forDnD}>
-                        <SideMenubarInner isFixed={isFixed}
-                                          isPreviewed={isPreviewed}
-                        >
-                            <div className={styles.style}/>
-                            <div className={styles.content}>
-                                <SideMenubarBlocks username={"Veta"}>Content</SideMenubarBlocks>
-                            </div>
-                            <div className={styles.borderDnD} ref={menuRef}>
-                                <div className={styles.hearDnD}/>
-                            </div>
-                        </SideMenubarInner>
-                    </div>
+                    <SideMenubarInner isFixed={isFixed}
+                                      isPreviewed={isPreviewed}
+                    >
+                        <div className={styles.style}/>
+                        <div className={styles.content}>
+                            <SideMenubarBlocks username={"Veta"}>Content</SideMenubarBlocks>
+                        </div>
+                        <div className={styles.borderDnD} ref={menuRef}>
+                            <div className={styles.hearDnD}/>
+                        </div>
+                    </SideMenubarInner>
                 </div>
             </SideMenubar>
         </div>

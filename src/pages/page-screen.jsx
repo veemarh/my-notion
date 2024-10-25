@@ -13,6 +13,7 @@ export default function PageScreen() {
                         <Workspace pages={pages}/>
                     </SideMenubarContextProvider>
                 </div>
+                <div></div> {/* для модалок */}
             </div>
         </div>
     )

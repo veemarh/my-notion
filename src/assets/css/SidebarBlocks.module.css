@@ -28,7 +28,6 @@
     user-select: none;
     transition: background-color 0.2s;
     cursor: pointer;
-    /*width: 100%;*/
     border-radius: 0.5em;
     color: inherit;
     fill: currentcolor;
@@ -71,9 +70,7 @@
     flex: 1 1 auto;
     display: flex;
     align-items: center;
-    /*white-space: nowrap;*/
     min-width: 0;
-    /*overflow: hidden;*/
 }
 
 .nameInner {

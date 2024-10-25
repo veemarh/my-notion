@@ -2,10 +2,17 @@ import styled from 'styled-components';
 
 const LinksContainer = styled.div`
     display: flex;
+    flex-grow: 1;
+    align-items: center;
+    min-width: 0;
 `
 
 const NavLink = styled.a`
-    padding: 0.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+    padding: 2px 0.5em;
     color: black;
     transition: opacity 0.2s;
 
@@ -15,7 +22,7 @@ const NavLink = styled.a`
 `
 
 const Span = styled.span`
-    padding: 0.5em;
+    margin: 0 2px;
 `
 
 export default function NavLinks({pages}) {

@@ -18,20 +18,17 @@
     position: relative;
     z-index: 20;
     width: 0;
-    flex-grow: 0;
-    flex-shrink: 0;
 
     background-color: inherit;
     box-shadow: rgba(0, 0, 0, 0.024) -1px 0 0 0 inset; /* вот эта штука должна менять цвет при наведении на DnD-ухо */
     pointer-events: none;
     transition: width 0.2s ease-out;
-    /*cursor: default;*/
 }
 
 .menuFixed {
     composes: menu;
     width: 240px;
-    background-color: gainsboro;
+    background-color: #eaeae9;
 }
 
 .inner {
@@ -65,21 +62,8 @@
 
 .fonts {
     height: 100%;
-    color: dimgray;
+    color: #5e5c57;
     font-weight: 500;
-}
-
-.forDnD {
-    position: absolute;
-    z-index: 9;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    width: 0;
-    overflow: visible;
-    pointer-events: none;
 }
 
 .style {
@@ -103,7 +87,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    /*justify-content: space-between;*/
     height: auto;
     max-height: calc(-118px + 100vh);
     overflow: hidden;

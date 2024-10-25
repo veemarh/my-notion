@@ -8,14 +8,11 @@
 
 * {
     border: 0;
-    /*font: inherit;*/
     vertical-align: baseline;
 }
 
 html {
-    scrollbar-width: thin;
-    scrollbar-gutter: stable;
-    scrollbar-color: #D3D1CB rgba(0, 0, 0, 0);
+    scrollbar-color: #d8d6d2 rgba(0, 0, 0, 0);
     font-size: 14px;
 }
 

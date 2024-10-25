@@ -17,12 +17,8 @@ export default function Workspace({pages}) {
                         <BarToggle/>
                     </div>
                 )}
-                <div className={styles.navbarPathSection}>
-                    <NavLinks pages={pages}/>
-                </div>
-                <div className={styles.navbarToolsSection}>
-                    TODO
-                </div>
+                <NavLinks pages={pages}/>
+                TODO
             </header>
             <main className={styles.main}>
                 <div className={styles.mainContent}>
