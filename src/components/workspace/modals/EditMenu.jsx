@@ -59,7 +59,6 @@ export default function EditMenu({setItemType, onClose}) {
             </StyledList>
             <StyledButton onClick={onClose}>Close</StyledButton>
         </StyledMenu>
-
     )
 }
 

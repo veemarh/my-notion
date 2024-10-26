@@ -8,9 +8,9 @@
     content: '';
     position: absolute;
     top: 0;
-    left: -1rem;
+    left: -1.25rem;
     height: 100%;
-    width: 1rem;
+    width: 1.25rem;
 }
 
 [contentEditable] {
@@ -75,22 +75,29 @@
 }
 
 .toggleWrapper {
-    position: absolute;
-    left: -1rem;
-    width: 1rem;
+    position: relative;
+    width: 0;
+    height: 1.5em;
     margin: 0.25rem 0;
 }
 
 .toggle {
     background-color: rgb(0, 0, 0, 0);
-    position: relative;
+    position: absolute;
     width: 1em;
-    height: 1em;
+    height: 2em;
+    margin-right: 0.25em;
     right: 0;
-    top: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 0.25em;
     cursor: pointer;
-    vertical-align: middle;
     opacity: 0.3;
+    transition: background-color 0.2s;
+}
+
+.toggle:hover {
+    background-color: #d8d6d2;
 }
 
 .modal {
