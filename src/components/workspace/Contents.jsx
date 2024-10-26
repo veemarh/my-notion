@@ -4,11 +4,11 @@ import NotionItem from './items/NotionItem.jsx';
 
 export default function Contents() {
     const items = [
-        {id: 1, type: "header", content: "header"},
+        {id: 1, type: "header", content: "Header"},
         {id: 2, type: "text", content: "Ganymede, Marc-Antoine Barrois."},
-        {id: 3, type: "subHeader", content: "sub header"},
+        {id: 3, type: "subHeader", content: "Sub header"},
         {id: 4, type: "text", content: "Группа: древесные пряные. Сезонность: круглый год."},
-        {id: 5, type: "subSubHeader", content: "sub sub header"},
+        {id: 5, type: "subSubHeader", content: "Sub sub header"},
         {
             id: 6,
             type: "text",
@@ -20,7 +20,6 @@ export default function Contents() {
                 "искусственности. Он таким задумывался. К нему нужно немного привыкнуть и дать несколько шансов, " +
                 "чтобы не ошибиться."
         },
-        {id: 7, type: "link", content: "link"},
     ];
 
     const notionItems = items.map((item) => (

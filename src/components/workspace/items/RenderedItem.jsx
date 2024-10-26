@@ -1,5 +1,5 @@
 import styles from '../../../assets/css/Contents.module.css';
-import {HeaderItem, LinkItem, SubHeaderItem, SubSubHeaderItem, TextItem} from './Items.jsx';
+import {HeaderItem, SubHeaderItem, SubSubHeaderItem, TextItem} from './Items.jsx';
 import {useCallback} from 'react';
 import sanitizeHtml from 'sanitize-html';
 
@@ -15,7 +15,7 @@ export default function RenderedItem({itemType, itemContent, setItemContent}) {
 
     const commonProps = {
         html: itemContent,
-        className: styles[`${itemType}Item`],
+        className: styles.itemInner,
         onChange: (evt) => setItemContent(evt.target.value),
         onBlur: onContentChange,
     };
@@ -36,10 +36,6 @@ export default function RenderedItem({itemType, itemContent, setItemContent}) {
         case 'text':
             return (
                 <TextItem {...commonProps}/>
-            );
-        case 'link':
-            return (
-                <LinkItem {...commonProps}/>
             );
     }
 };

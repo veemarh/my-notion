@@ -47,15 +47,3 @@ export function SubSubHeaderItem({html, className, onChange}) {
         />
     );
 }
-
-export function LinkItem({html, className, onChange}) {
-    return (
-        <ContentEditable
-            html={html}
-            className={className}
-            onChange={onChange}
-            tagName="a"
-            placeholder="Type your link there..."
-        />
-    );
-}

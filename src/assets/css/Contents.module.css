@@ -1,6 +1,16 @@
 .blockWrapper {
+    position: relative;
     max-width: 100%;
     width: 100%;
+}
+
+.blockWrapper:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1rem;
+    height: 100%;
+    width: 1rem;
 }
 
 [contentEditable] {
@@ -25,85 +35,73 @@
     visibility: hidden;
 }
 
-.common [data-empty=true] [contentEditable]:hover:before {
-    opacity: 0.15;
-    visibility: visible;
-}
-
 .common [data-empty=true] [contentEditable]:focus:before {
     opacity: 0.3;
     visibility: visible;
 }
 
 .header {
-    margin-top: 2em;
-    margin-bottom: 0.5em;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 2rem;
 }
 
 .subHeader {
-    margin-top: 1.5em;
+    margin-top: 1.5rem;
+    font-weight: 600;
+    font-size: 1.5rem;
 }
 
 .subSubHeader {
-    margin-top: 1.25em;
-}
-
-.link {
-    margin: 0; /* вот это убрать потом */
+    margin-top: 1.25rem;
+    font-weight: 600;
+    font-size: 1.25rem;
 }
 
 .flexWrapper {
+    position: relative;     /* нужен? */
     display: flex;
     color: inherit;
 }
 
-.textItem {
+.itemInner {
     max-width: 100%;
     width: 100%;
     white-space: pre-wrap;
     word-break: break-word;
     padding: 0.25rem;
+    font: inherit;
 }
 
-.headerItem {
-    composes: textItem;
-    font-weight: 600;
-    font-size: 2em;
+.toggleWrapper {
+    position: absolute;
+    left: -1rem;
+    width: 1rem;
+    margin: 0.25rem 0;
 }
 
-.subHeaderItem {
-    composes: textItem;
-    font-weight: 600;
-    font-size: 1.5em;
-}
-
-.subSubHeaderItem {
-    composes: textItem;
-    font-weight: 600;
-    font-size: 1.25em;
-}
-
-.linkItem {
-    composes: textItem;
-    border-radius: 0.5em;
-    background-color: gainsboro;
-}
-
-.editMenu {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    padding: 0.5em;
-    box-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px, rgba(0, 0, 0, 0.024) -1px 0 0 0 inset;
-    border-radius: 1em;
-    transform-origin: 0 0;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: none;
-    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.editMenuItem {
-    pointer-events: auto;
+.toggle {
+    background-color: rgb(0, 0, 0, 0);
+    position: relative;
+    width: 1em;
+    height: 1em;
+    right: 0;
+    top: 0;
     cursor: pointer;
+    vertical-align: middle;
+    opacity: 0.3;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100vh;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
