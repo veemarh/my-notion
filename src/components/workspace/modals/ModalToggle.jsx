@@ -11,6 +11,7 @@ export default function withToggleAndModal(WrappedComponent) {
         const [itemContent, setItemContent] = useState(props.content);
         const isEmpty = itemContent === "<br>" || itemContent === "";
         const modalRef = useRef(null);
+        const toggleRef = useRef(null);
 
         const handleModalClose = () => {
             setHovered(false);
@@ -22,8 +23,19 @@ export default function withToggleAndModal(WrappedComponent) {
                      onMouseEnter={() => setHovered(true)}
                      onMouseLeave={() => setHovered(false)}>
                     <div className={styles.flexWrapper} data-empty={isEmpty}>
-                        {isHovered && (
-                            <div className={styles.toggleWrapper}>
+                        <CSSTransition
+                            nodeRef={toggleRef}
+                            in={isHovered}
+                            timeout={200}
+                            classNames={{
+                                enter: styles.toggleEnter,
+                                enterActive: styles.toggleEnterActive,
+                                exit: styles.toggleExit,
+                                exitActive: styles.toggleExitActive,
+                            }}
+                            unmountOnExit
+                        >
+                            <div ref={toggleRef} className={styles.toggleWrapper}>
                                 <button className={styles.toggle}
                                         onClick={() => setShowModal(true)}>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -36,7 +48,7 @@ export default function withToggleAndModal(WrappedComponent) {
                                     </svg>
                                 </button>
                             </div>
-                        )}
+                        </CSSTransition>
                         <WrappedComponent type={itemType}
                                           content={itemContent}
                                           setContent={setItemContent}/>
@@ -45,7 +57,7 @@ export default function withToggleAndModal(WrappedComponent) {
                 <CSSTransition
                     nodeRef={modalRef}
                     in={showModal}
-                    timeout={300}
+                    timeout={200}
                     classNames={{
                         enter: styles.modalEnter,
                         enterActive: styles.modalEnterActive,
