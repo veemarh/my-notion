@@ -100,15 +100,20 @@
     background-color: #d8d6d2;
 }
 
-.modal {
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.modalEnter {
+    opacity: 0;
+}
+
+.modalEnterActive {
+    opacity: 1;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modalExit {
+    opacity: 1;
+}
+
+.modalExitActive {
+    opacity: 0;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }

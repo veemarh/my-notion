@@ -1,7 +1,7 @@
-import {useState} from 'react';
-import {createPortal} from 'react-dom';
+import {useRef, useState} from 'react';
 import styles from '../../../assets/css/Contents.module.css';
-import EditMenu from './EditMenu.jsx';
+import {CSSTransition} from 'react-transition-group';
+import Modal from './Modal.jsx';
 
 export default function withToggleAndModal(WrappedComponent) {
     return function ToggleAndModal(props) {
@@ -10,6 +10,7 @@ export default function withToggleAndModal(WrappedComponent) {
         const [itemType, setItemType] = useState(props.type);
         const [itemContent, setItemContent] = useState(props.content);
         const isEmpty = itemContent === "<br>" || itemContent === "";
+        const modalRef = useRef(null);
 
         const handleModalClose = () => {
             setHovered(false);
@@ -41,12 +42,20 @@ export default function withToggleAndModal(WrappedComponent) {
                                           setContent={setItemContent}/>
                     </div>
                 </div>
-                {showModal && createPortal(
-                    <div className={styles.modal} onClick={handleModalClose}>
-                        <EditMenu setItemType={setItemType} onClose={handleModalClose}/>
-                    </div>,
-                    document.getElementById("portal")
-                )}
+                <CSSTransition
+                    nodeRef={modalRef}
+                    in={showModal}
+                    timeout={300}
+                    classNames={{
+                        enter: styles.modalEnter,
+                        enterActive: styles.modalEnterActive,
+                        exit: styles.modalExit,
+                        exitActive: styles.modalExitActive,
+                    }}
+                    unmountOnExit
+                >
+                    <Modal ref={modalRef} onClick={handleModalClose} setItemType={setItemType}/>
+                </CSSTransition>
             </>
         );
     };
