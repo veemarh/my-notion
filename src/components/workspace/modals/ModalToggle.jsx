@@ -1,7 +1,7 @@
 import {useRef, useState} from 'react';
 import styles from '../../../assets/css/Contents.module.css';
 import {CSSTransition} from 'react-transition-group';
-import Modal from './Modal.jsx';
+import ModalWithTransition from './Modal.jsx';
 
 export default function withToggleAndModal(WrappedComponent) {
     return function ToggleAndModal(props) {
@@ -54,20 +54,12 @@ export default function withToggleAndModal(WrappedComponent) {
                                           setContent={setItemContent}/>
                     </div>
                 </div>
-                <CSSTransition
-                    nodeRef={modalRef}
+                <ModalWithTransition
+                    ref={modalRef}
                     in={showModal}
-                    timeout={200}
-                    classNames={{
-                        enter: styles.modalEnter,
-                        enterActive: styles.modalEnterActive,
-                        exit: styles.modalExit,
-                        exitActive: styles.modalExitActive,
-                    }}
-                    unmountOnExit
-                >
-                    <Modal ref={modalRef} onClick={handleModalClose} setItemType={setItemType}/>
-                </CSSTransition>
+                    onClick={handleModalClose}
+                    setItemType={setItemType}
+                />
             </>
         );
     };
