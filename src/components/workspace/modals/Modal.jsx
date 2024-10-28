@@ -2,7 +2,7 @@ import {createPortal} from 'react-dom';
 import EditMenu from './EditMenu.jsx';
 import {forwardRef} from 'react';
 import styled from 'styled-components';
-import styles from '../../../assets/css/Contents.module.css';
+import styles from '../../../assets/css/Transition.module.css';
 import withTransition from '../transition/withTransition.jsx';
 
 const Modal = forwardRef(({onClick, setItemType}, ref) => {
@@ -28,7 +28,6 @@ const ModalWithTransition = withTransition(Modal, {
 });
 
 export default ModalWithTransition;
-
 
 const StyledModal = styled.div`
     position: fixed;

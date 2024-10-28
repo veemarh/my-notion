@@ -1,0 +1,35 @@
+.toggleEnter {
+    opacity: 0;
+}
+
+.toggleEnterActive {
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+.toggleExit {
+    opacity: 1;
+}
+
+.toggleExitActive {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.modalEnter {
+    opacity: 0;
+}
+
+.modalEnterActive {
+    opacity: 1;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modalExit {
+    opacity: 1;
+}
+
+.modalExitActive {
+    opacity: 0;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
