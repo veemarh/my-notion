@@ -1,7 +1,7 @@
 import {useRef, useState} from 'react';
 import styles from '../../../assets/css/Contents.module.css';
-import {CSSTransition} from 'react-transition-group';
 import ModalWithTransition from './Modal.jsx';
+import ToggleButtonWithTransition from '../toggle-button/ToggleButton.jsx';
 
 export default function withToggleAndModal(WrappedComponent) {
     return function ToggleAndModal(props) {
@@ -17,38 +17,20 @@ export default function withToggleAndModal(WrappedComponent) {
             setHovered(false);
             setShowModal(false);
         }
+        const handleModalOpen = () => {
+            setShowModal(true);
+        }
         return (
             <>
                 <div className={`${styles.blockWrapper} ${styles[itemType] || styles.common}`}
                      onMouseEnter={() => setHovered(true)}
                      onMouseLeave={() => setHovered(false)}>
                     <div className={styles.flexWrapper} data-empty={isEmpty}>
-                        <CSSTransition
-                            nodeRef={toggleRef}
+                        <ToggleButtonWithTransition
+                            ref={toggleRef}
                             in={isHovered}
-                            timeout={200}
-                            classNames={{
-                                enter: styles.toggleEnter,
-                                enterActive: styles.toggleEnterActive,
-                                exit: styles.toggleExit,
-                                exitActive: styles.toggleExitActive,
-                            }}
-                            unmountOnExit
-                        >
-                            <div ref={toggleRef} className={styles.toggleWrapper}>
-                                <button className={styles.toggle}
-                                        onClick={() => setShowModal(true)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <circle cx="8" cy="2" r="2"/>
-                                        <circle cx="8" cy="12" r="2"/>
-                                        <circle cx="8" cy="22" r="2"/>
-                                        <circle cx="16" cy="2" r="2"/>
-                                        <circle cx="16" cy="12" r="2"/>
-                                        <circle cx="16" cy="22" r="2"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </CSSTransition>
+                            onClick={handleModalOpen}
+                        />
                         <WrappedComponent type={itemType}
                                           content={itemContent}
                                           setContent={setItemContent}/>
