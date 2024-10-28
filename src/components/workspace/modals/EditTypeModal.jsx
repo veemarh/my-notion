@@ -10,7 +10,6 @@ const StyledMenu = styled.div`
     border-radius: 1em;
     pointer-events: none;
     background-color: white;
-    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 `
 
 const StyledList = styled.ul`
@@ -45,24 +44,25 @@ const StyledButton = styled.button`
     }
 `
 
-export default function EditMenu({setItemType, onClose}) {
+export default function EditTypeModal({setItemType, onClose}) {
     const handleClick = (evt) => {
         setItemType(evt.currentTarget.dataset.itemType);
+        onClose(evt);
     }
     return (
         <StyledMenu tabIndex="-1">
             <StyledList>
-                <EditMenuItem type="text" onClick={handleClick}/>
-                <EditMenuItem type="header" onClick={handleClick}/>
-                <EditMenuItem type="subHeader" onClick={handleClick}/>
-                <EditMenuItem type="subSubHeader" onClick={handleClick}/>
+                <EditTypeItem type="text" onClick={handleClick}/>
+                <EditTypeItem type="header" onClick={handleClick}/>
+                <EditTypeItem type="subHeader" onClick={handleClick}/>
+                <EditTypeItem type="subSubHeader" onClick={handleClick}/>
             </StyledList>
             <StyledButton onClick={onClose}>Close</StyledButton>
         </StyledMenu>
     )
 }
 
-function EditMenuItem({type, onClick}) {
+function EditTypeItem({type, onClick}) {
     return (
         <StyledItem data-item-type={type} tabIndex="-1" onClick={onClick}>{type}</StyledItem>
     )

@@ -2,6 +2,7 @@ import {useRef, useState} from 'react';
 import styles from '../../../assets/css/Contents.module.css';
 import ModalWithTransition from './Modal.jsx';
 import ToggleButtonWithTransition from '../toggle-button/ToggleButton.jsx';
+import EditTypeModal from './EditTypeModal.jsx';
 
 export default function withToggleAndModal(WrappedComponent) {
     return function ToggleAndModal(props) {
@@ -13,9 +14,11 @@ export default function withToggleAndModal(WrappedComponent) {
         const modalRef = useRef(null);
         const toggleRef = useRef(null);
 
-        const handleModalClose = () => {
-            setHovered(false);
-            setShowModal(false);
+        const handleModalClose = (evt) => {
+            if (evt.currentTarget === evt.target) {
+                setHovered(false);
+                setShowModal(false);
+            }
         }
         const handleModalOpen = () => {
             setShowModal(true);
@@ -39,8 +42,8 @@ export default function withToggleAndModal(WrappedComponent) {
                 <ModalWithTransition
                     ref={modalRef}
                     in={showModal}
-                    onClick={handleModalClose}
-                    setItemType={setItemType}
+                    modal={<EditTypeModal setItemType={setItemType} onClose={handleModalClose}/>}
+                    onClose={handleModalClose}
                 />
             </>
         );

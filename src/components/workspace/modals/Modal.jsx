@@ -1,17 +1,18 @@
 import {createPortal} from 'react-dom';
-import EditMenu from './EditMenu.jsx';
 import {forwardRef} from 'react';
 import styled from 'styled-components';
 import styles from '../../../assets/css/Transition.module.css';
 import withTransition from '../transition/withTransition.jsx';
 
-const Modal = forwardRef(({onClick, setItemType}, ref) => {
+// Потом можно пересмотреть использование onClose
+// и в целом функции бэкдропа
+const Modal = forwardRef(({modal, onClose}, ref) => {
     return (
         <>
             {createPortal(
-                <StyledModal ref={ref} onClick={onClick}>
-                    <EditMenu setItemType={setItemType} onClose={onClick}/>
-                </StyledModal>,
+                <StyledBackdrop ref={ref} onClick={onClose}>
+                    {modal}
+                </StyledBackdrop>,
                 document.getElementById("portal")
             )}
         </>
@@ -29,7 +30,7 @@ const ModalWithTransition = withTransition(Modal, {
 
 export default ModalWithTransition;
 
-const StyledModal = styled.div`
+const StyledBackdrop = styled.div`
     position: fixed;
     z-index: 1000;
     top: 0;
