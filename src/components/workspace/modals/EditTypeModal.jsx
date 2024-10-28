@@ -4,7 +4,7 @@ const StyledMenu = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1em;
-    min-width: 200px;
+    min-width: fit-content;
     padding: 0.5em;
     box-shadow: rgba(15, 15, 15, 0.05) 0 0 0 1px, rgba(15, 15, 15, 0.1) 0 3px 6px, rgba(15, 15, 15, 0.2) 0 9px 24px, rgba(0, 0, 0, 0.024) -1px 0 0 0 inset;
     border-radius: 1em;
@@ -14,7 +14,6 @@ const StyledMenu = styled.div`
 
 const StyledList = styled.ul`
     display: flex;
-    flex-direction: column;
     gap: 1px;
     pointer-events: auto;
     cursor: pointer;

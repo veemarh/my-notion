@@ -10,6 +10,7 @@ export default function withToggleAndModal(WrappedComponent) {
         const [showModal, setShowModal] = useState(false);
         const [itemType, setItemType] = useState(props.type);
         const [itemContent, setItemContent] = useState(props.content);
+        const [modalPosition, setModalPosition] = useState(null);
         const isEmpty = itemContent === "<br>" || itemContent === "";
         const modalRef = useRef(null);
         const toggleRef = useRef(null);
@@ -20,7 +21,14 @@ export default function withToggleAndModal(WrappedComponent) {
                 setShowModal(false);
             }
         }
-        const handleModalOpen = () => {
+        const handleModalOpen = (evt) => {
+            const rect = evt.currentTarget.getBoundingClientRect();
+            setModalPosition({
+                top: rect.y,
+                left: rect.x,
+                height: rect.height,
+                width: rect.width,
+            });
             setShowModal(true);
         }
         return (
@@ -44,6 +52,7 @@ export default function withToggleAndModal(WrappedComponent) {
                     in={showModal}
                     modal={<EditTypeModal setItemType={setItemType} onClose={handleModalClose}/>}
                     onClose={handleModalClose}
+                    position={modalPosition}
                 />
             </>
         );
