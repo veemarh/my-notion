@@ -8,10 +8,8 @@ export default function withToggleAndModal(WrappedComponent) {
     return function ToggleAndModal(props) {
         const [isHovered, setHovered] = useState(false);
         const [showModal, setShowModal] = useState(false);
-        const [itemType, setItemType] = useState(props.type);
-        const [itemContent, setItemContent] = useState(props.content);
         const [modalPosition, setModalPosition] = useState(null);
-        const isEmpty = itemContent === "<br>" || itemContent === "";
+        const isEmpty = props.content === "<br>" || props.content === "";
         const modalRef = useRef(null);
         const toggleRef = useRef(null);
 
@@ -33,7 +31,7 @@ export default function withToggleAndModal(WrappedComponent) {
         }
         return (
             <>
-                <div className={`${styles.blockWrapper} ${styles[itemType] || styles.common}`}
+                <div className={`${styles.blockWrapper} ${styles[props.type] || styles.common}`}
                      onMouseEnter={() => setHovered(true)}
                      onMouseLeave={() => setHovered(false)}>
                     <div className={styles.flexWrapper} data-empty={isEmpty}>
@@ -42,15 +40,13 @@ export default function withToggleAndModal(WrappedComponent) {
                             in={isHovered}
                             onClick={handleModalOpen}
                         />
-                        <WrappedComponent type={itemType}
-                                          content={itemContent}
-                                          setContent={setItemContent}/>
+                        <WrappedComponent {...props}/>
                     </div>
                 </div>
                 <ModalWithTransition
                     ref={modalRef}
                     in={showModal}
-                    modal={<EditTypeModal setItemType={setItemType} onClose={handleModalClose}/>}
+                    modal={<EditTypeModal setType={props.setType} onClose={handleModalClose}/>}
                     onClose={handleModalClose}
                     position={modalPosition}
                 />

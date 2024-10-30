@@ -43,9 +43,9 @@ const StyledButton = styled.button`
     }
 `
 
-export default function EditTypeModal({setItemType, onClose}) {
+export default function EditTypeModal({setType, onClose}) {
     const handleClick = (evt) => {
-        setItemType(evt.currentTarget.dataset.itemType);
+        setType(evt.currentTarget.dataset.itemType);
         onClose(evt);
     }
     return (

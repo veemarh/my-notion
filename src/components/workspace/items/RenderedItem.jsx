@@ -3,24 +3,32 @@ import {HeaderItem, SubHeaderItem, SubSubHeaderItem, TextItem} from './Items.jsx
 import {useCallback} from 'react';
 import sanitizeHtml from 'sanitize-html';
 
-export default function RenderedItem({itemType, itemContent, setItemContent}) {
+export default function RenderedItem({type, content, setContent, onDelete}) {
     const onContentChange = useCallback(evt => {
         const sanitizeConf = {
             allowedTags: ["b", "i", "u", "s", "del", "a", "p", "ul", "ol", "li", "h2", "h3", "h4"],
             allowedAttributes: {a: ["href"]}
         };
 
-        setItemContent(sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf))
-    }, [setItemContent])
+        setContent(sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf))
+    }, [setContent])
 
-    const commonProps = {
-        html: itemContent,
-        className: styles.itemInner,
-        onChange: (evt) => setItemContent(evt.target.value),
-        onBlur: onContentChange,
+    const onKeyDownHandler = (evt) => {
+        if (evt.key === "Backspace" && evt.currentTarget.textContent === "") {
+            evt.preventDefault();
+            onDelete();
+        }
     };
 
-    switch (itemType) {
+    const commonProps = {
+        html: content,
+        className: styles.itemInner,
+        onChange: (evt) => setContent(evt.target.value),
+        onBlur: onContentChange,
+        onKeyDown: onKeyDownHandler,
+    };
+
+    switch (type) {
         case 'header':
             return (
                 <HeaderItem {...commonProps}/>

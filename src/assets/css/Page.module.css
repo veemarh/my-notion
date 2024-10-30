@@ -73,7 +73,7 @@
     display: grid;
     grid-template-columns: [start] 96px [content-start] 1fr [content-end] 96px [end];
     width: 100%;
-    padding-bottom: 20vh;
+    /*padding-bottom: 20vh;*/
 }
 
 .gridContent {
@@ -94,4 +94,5 @@
     display: flex;
     flex-direction: column;
     gap: 1px;
+    padding-bottom: 20vh;
 }
