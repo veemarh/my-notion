@@ -3,7 +3,7 @@ import {HeaderItem, SubHeaderItem, SubSubHeaderItem, TextItem} from './Items.jsx
 import {useCallback} from 'react';
 import sanitizeHtml from 'sanitize-html';
 
-export default function RenderedItem({type, content, setContent, onDelete}) {
+export default function RenderedItem({type, content, setContent, onDelete, onEnter}) {
     const onContentChange = useCallback(evt => {
         const sanitizeConf = {
             allowedTags: ["b", "i", "u", "s", "del", "a", "p", "ul", "ol", "li", "h2", "h3", "h4"],
@@ -14,7 +14,15 @@ export default function RenderedItem({type, content, setContent, onDelete}) {
     }, [setContent])
 
     const onKeyDownHandler = (evt) => {
-        if (evt.key === "Backspace" && evt.currentTarget.textContent === "") {
+        if (evt.key === "Enter") {
+            const selection = window.getSelection();
+            const caretPosition = selection.anchorOffset;
+            const contentLength = evt.target.textContent.length;
+            if (caretPosition === contentLength) {
+                evt.preventDefault();
+                onEnter();
+            }
+        } else if (evt.key === "Backspace" && evt.currentTarget.textContent === "") {
             evt.preventDefault();
             onDelete();
         }

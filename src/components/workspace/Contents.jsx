@@ -7,7 +7,7 @@ export default function Contents() {
     const [items, setItems] = useState(ITEMS);
     const containerRef = useRef(null);
 
-    const addNewBlock = (evt) => {
+    const addBlockAfter = (evt) => {
         const container = containerRef.current;
         const lastItem = items[items.length - 1];
 
@@ -22,6 +22,17 @@ export default function Contents() {
             const newItem = {id: Date.now(), type: "text", content: ""};
             setItems([...items, newItem]);
         }
+    };
+
+    const addBlockBetween = (id) => {
+        setItems(prevItems => {
+            const index = prevItems.findIndex(item => item.id === id);
+            return [
+                ...prevItems.slice(0, index + 1),
+                {id: Date.now(), type: "text", content: ""},
+                ...prevItems.slice(index + 1),
+            ];
+        });
     };
 
     const updateType = (id, newType) => {
@@ -49,11 +60,12 @@ export default function Contents() {
         <NotionItem key={item.id} type={item.type} content={item.content}
                     setType={(newType) => updateType(item.id, newType)}
                     setContent={(newContent) => updateContent(item.id, newContent)}
-                    onDelete={() => deleteBlock(item.id)}/>
+                    onDelete={() => deleteBlock(item.id)}
+                    onEnter={() => addBlockBetween(item.id)}/>
     ));
 
     return (
-        <div ref={containerRef} className={styles.container} onClick={addNewBlock}>
+        <div ref={containerRef} className={styles.container} onClick={addBlockAfter}>
             {notionItems}
             {/*<Link to="/register">register</Link>*/}
             {/*<Link to="/login">login</Link>*/}
