@@ -1,9 +1,10 @@
 import RenderedItem from './RenderedItem.jsx';
 import withToggleAndModal from '../modals/ModalToggle.jsx';
 
-function NotionItem({type, content, setType, setContent, onDelete, onEnter}) {
+function NotionItem({id, type, content, setType, setContent, onDelete, onEnter}) {
     return (
-        <RenderedItem type={type}
+        <RenderedItem id={id}
+                      type={type}
                       content={content}
                       setType={setType}
                       setContent={setContent}

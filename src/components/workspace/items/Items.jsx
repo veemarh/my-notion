@@ -1,8 +1,9 @@
 import ContentEditable from 'react-contenteditable';
 
-export function TextItem({html, className, onChange, onKeyDown}) {
+export function TextItem({id, html, className, onChange, onKeyDown}) {
     return (
         <ContentEditable
+            id={id}
             html={html}
             className={className}
             onChange={onChange}
@@ -13,9 +14,10 @@ export function TextItem({html, className, onChange, onKeyDown}) {
     );
 }
 
-export function HeaderItem({html, className, onChange, onKeyDown}) {
+export function HeaderItem({id, html, className, onChange, onKeyDown}) {
     return (
         <ContentEditable
+            id={id}
             html={html}
             className={className}
             onChange={onChange}
@@ -26,9 +28,10 @@ export function HeaderItem({html, className, onChange, onKeyDown}) {
     );
 }
 
-export function SubHeaderItem({html, className, onChange, onKeyDown}) {
+export function SubHeaderItem({id, html, className, onChange, onKeyDown}) {
     return (
         <ContentEditable
+            id={id}
             html={html}
             className={className}
             onChange={onChange}
@@ -39,9 +42,10 @@ export function SubHeaderItem({html, className, onChange, onKeyDown}) {
     );
 }
 
-export function SubSubHeaderItem({html, className, onChange, onKeyDown}) {
+export function SubSubHeaderItem({id, html, className, onChange, onKeyDown}) {
     return (
         <ContentEditable
+            id={id}
             html={html}
             className={className}
             onChange={onChange}

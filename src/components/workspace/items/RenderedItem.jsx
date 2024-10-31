@@ -3,7 +3,7 @@ import {HeaderItem, SubHeaderItem, SubSubHeaderItem, TextItem} from './Items.jsx
 import {useCallback} from 'react';
 import sanitizeHtml from 'sanitize-html';
 
-export default function RenderedItem({type, content, setContent, onDelete, onEnter}) {
+export default function RenderedItem({id, type, content, setContent, onDelete, onEnter}) {
     const onContentChange = useCallback(evt => {
         const sanitizeConf = {
             allowedTags: ["b", "i", "u", "s", "del", "a", "p", "ul", "ol", "li", "h2", "h3", "h4"],
@@ -13,12 +13,34 @@ export default function RenderedItem({type, content, setContent, onDelete, onEnt
         setContent(sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf))
     }, [setContent])
 
+    function getTextLength(elem) {
+        let range = elem.ownerDocument.createRange();
+        range.selectNodeContents(elem);
+
+        return range.toString().length;
+    }
+
+    function getCaretOffset(elem) {
+        let sel = elem.ownerDocument.defaultView.getSelection();
+        if (sel.rangeCount === 0) return 0;
+
+        let range = elem.ownerDocument.defaultView.getSelection().getRangeAt(0);
+        let preCaretRange = range.cloneRange();
+        preCaretRange.selectNodeContents(elem);
+        preCaretRange.setEnd(range.endContainer, range.endOffset);
+        return preCaretRange.toString().length;
+    }
+
+    function isCaretAtEnd(elem) {
+        if (elem.ownerDocument.activeElement !== elem) return false;
+        if (elem.ownerDocument.defaultView.getSelection().getRangeAt(0).toString().length > 0) return false;
+
+        return getCaretOffset(elem) === getTextLength(elem);
+    }
+
     const onKeyDownHandler = (evt) => {
         if (evt.key === "Enter") {
-            const selection = window.getSelection();
-            const caretPosition = selection.anchorOffset;
-            const contentLength = evt.target.textContent.length;
-            if (caretPosition === contentLength) {
+            if (isCaretAtEnd(evt.target)) {
                 evt.preventDefault();
                 onEnter();
             }
@@ -29,6 +51,7 @@ export default function RenderedItem({type, content, setContent, onDelete, onEnt
     };
 
     const commonProps = {
+        id: id,
         html: content,
         className: styles.itemInner,
         onChange: (evt) => setContent(evt.target.value),
