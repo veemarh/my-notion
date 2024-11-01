@@ -1,5 +1,5 @@
 import styles from '../../../assets/css/Contents.module.css';
-import {HeaderItem, SubHeaderItem, SubSubHeaderItem, TextItem} from './Items.jsx';
+import {EditableItem} from './Items.jsx';
 import {useCallback} from 'react';
 import sanitizeHtml from 'sanitize-html';
 import {isCaretAtEnd, getSelectionEnd, getSelectionStart, setSelectionRange} from '../selection/Selection.js';
@@ -41,22 +41,14 @@ export default function RenderedItem({id, type, content, setContent, onDelete, o
         onKeyDown: onKeyDownHandler,
     };
 
-    switch (type) {
-        case 'header':
-            return (
-                <HeaderItem {...commonProps}/>
-            );
-        case 'subHeader':
-            return (
-                <SubHeaderItem {...commonProps}/>
-            );
-        case 'subSubHeader':
-            return (
-                <SubSubHeaderItem {...commonProps}/>
-            );
-        case 'text':
-            return (
-                <TextItem {...commonProps}/>
-            );
-    }
+    const typeSettings = {
+        text: {tagName: "div", placeholder: "Write something there..."},
+        header: {tagName: "h2", placeholder: "Heading 1"},
+        subHeader: {tagName: "h3", placeholder: "Heading 2"},
+        subSubHeader: {tagName: "h4", placeholder: "Heading 3"},
+    };
+
+    const {tagName, placeholder} = typeSettings[type];
+
+    return <EditableItem {...commonProps} tagName={tagName} placeholder={placeholder}/>;
 };
