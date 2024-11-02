@@ -17,19 +17,13 @@
     outline: none;
 }
 
-[contentEditable]:before {
+[data-empty=true] [contentEditable]:before {
     content: attr(placeholder);
-    position: absolute;
     pointer-events: none;
     opacity: 0.3;
-    transition: 0.2s;
+    transition: opacity 0.2s, visibility 0.2s;
 }
 
-[data-empty=false] [contentEditable]:before {
-    transition: 0s;
-}
-
-[data-empty=false] [contentEditable]:before,
 .common [data-empty=true] [contentEditable]:before {
     opacity: 0;
     visibility: hidden;
@@ -59,6 +53,15 @@
     font-size: 1.25rem;
 }
 
+.quote {
+    margin: 4px 0;
+}
+
+.callout {
+    margin: 4px 0;
+    fill: #5e5c57;
+}
+
 .flexWrapper {
     position: relative;     /* нужен? */
     display: flex;
@@ -71,5 +74,13 @@
     white-space: pre-wrap;
     word-break: break-word;
     padding: 0.25rem;
+    font: inherit;
+}
+
+.quoteInner {
+    max-width: 100%;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 0 0.25rem;
     font: inherit;
 }

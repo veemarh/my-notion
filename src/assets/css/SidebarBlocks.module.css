@@ -30,7 +30,6 @@
     cursor: pointer;
     border-radius: 0.5em;
     color: inherit;
-    fill: currentcolor;
 }
 
 .itemOuter:hover {

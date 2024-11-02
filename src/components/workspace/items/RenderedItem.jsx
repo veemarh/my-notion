@@ -33,7 +33,6 @@ export default function RenderedItem({id, type, content, setContent, onDelete, o
     const commonProps = {
         id: id,
         html: content,
-        className: styles.itemInner,
         onChange: (evt) => {
             setContent(evt.target.value);
             onContentChange(evt);
@@ -42,13 +41,23 @@ export default function RenderedItem({id, type, content, setContent, onDelete, o
     };
 
     const typeSettings = {
-        text: {tagName: "div", placeholder: "Write something there..."},
-        header: {tagName: "h2", placeholder: "Heading 1"},
-        subHeader: {tagName: "h3", placeholder: "Heading 2"},
-        subSubHeader: {tagName: "h4", placeholder: "Heading 3"},
+        text: {tagName: "div", placeholder: "Write something there...", className: styles.itemInner},
+        header: {tagName: "h2", placeholder: "Heading 1", className: styles.itemInner},
+        subHeader: {tagName: "h3", placeholder: "Heading 2", className: styles.itemInner},
+        subSubHeader: {tagName: "h4", placeholder: "Heading 3", className: styles.itemInner},
+        quote: {tagName: "div", placeholder: "Empty quote", className: styles.quoteInner},
+        callout: {tagName: "div", placeholder: "Empty callout", className: styles.itemInner}
     };
 
-    const {tagName, placeholder} = typeSettings[type];
+    const {tagName, placeholder, className} = typeSettings[type] || {};
 
-    return <EditableItem {...commonProps} tagName={tagName} placeholder={placeholder}/>;
+    return (
+        <EditableItem
+            {...commonProps}
+            type={type}
+            tagName={tagName}
+            placeholder={placeholder}
+            className={className}
+        />
+    );
 };
