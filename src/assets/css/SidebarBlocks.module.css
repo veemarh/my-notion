@@ -64,16 +64,3 @@
     justify-content: center;
     margin-right: 1em;
 }
-
-.nameOuter {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    min-width: 0;
-}
-
-.nameInner {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}

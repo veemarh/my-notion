@@ -1,16 +1,8 @@
 import styled from 'styled-components';
+import {OverflowText, OverflowWrapper} from '../workspace/text-overflow/OverflowBlock.jsx';
 
-const LinksContainer = styled.div`
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    min-width: 0;
-`
 
-const NavLink = styled.a`
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+const NavLink = styled(OverflowText)`
     max-width: 160px;
     padding: 2px 0.5em;
     color: black;
@@ -41,6 +33,6 @@ export default function NavLinks({pages}) {
     }, []);
 
     return (
-        <LinksContainer>{links}</LinksContainer>
+        <OverflowWrapper>{links}</OverflowWrapper>
     )
 }

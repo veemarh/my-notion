@@ -1,4 +1,5 @@
 import styles from '../../assets/css/SidebarBlocks.module.css';
+import {OverflowBlock} from '../workspace/text-overflow/OverflowBlock.jsx';
 
 export default function SideMenubarOneItem({item, onClick}) {
     return (
@@ -7,9 +8,7 @@ export default function SideMenubarOneItem({item, onClick}) {
                 <div className={styles.icon}>
                     {item.icon}
                 </div>
-                <div className={styles.nameOuter}>
-                    <div className={styles.nameInner}>{item.title}</div>
-                </div>
+                <OverflowBlock>{item.title}</OverflowBlock>
             </div>
         </div>
     )
