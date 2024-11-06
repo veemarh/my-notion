@@ -10,8 +10,8 @@ import {
     updateContent,
     updateType
 } from './utils/items/itemsUtils.js';
+import {getClipboardData} from './utils/paste/pasteUtils.js';
 
-document.body.createTextRange = undefined;
 export default function Contents() {
     const [items, setItems] = useState(ITEMS);
     const [focusedItemIndex, setFocusedItemIndex] = useState(null);
@@ -30,7 +30,8 @@ export default function Contents() {
                     setType={(newType) => updateType(setItems, item.id, newType)}
                     setContent={(newContent) => updateContent(setItems, item.id, newContent)}
                     onDelete={() => deleteBlock(setItems, setFocusedItemIndex, item.id)}
-                    onEnter={() => addBlockBetween(setItems, setFocusedItemIndex, item.id)}/>
+                    onEnter={() => addBlockBetween(setItems, setFocusedItemIndex, item.id)}
+                    onPaste={(evt) => getClipboardData(evt, setItems, setFocusedItemIndex, item.id)}/>
     ));
 
     return (

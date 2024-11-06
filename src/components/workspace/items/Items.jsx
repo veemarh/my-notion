@@ -1,6 +1,6 @@
 import ContentEditable from 'react-contenteditable';
 
-export function EditableItemInner({id, html, className, onChange, onKeyDown, tagName, placeholder}) {
+export function EditableItemInner({id, html, className, onChange, onKeyDown, onPaste, tagName, placeholder}) {
     return (
         <ContentEditable
             id={id}
@@ -10,12 +10,13 @@ export function EditableItemInner({id, html, className, onChange, onKeyDown, tag
             tagName={tagName}
             placeholder={placeholder}
             onKeyDown={onKeyDown}
+            onPaste={onPaste}
         />
     );
 }
 
-export function EditableItem({id, type, html, className, onChange, onKeyDown, tagName, placeholder}) {
-    const contentProps = {id, html, className, onChange, onKeyDown, tagName, placeholder};
+export function EditableItem({id, type, html, className, onChange, onKeyDown, onPaste, tagName, placeholder}) {
+    const contentProps = {id, html, className, onChange, onKeyDown, onPaste, tagName, placeholder};
 
     switch (type) {
         case "quote":

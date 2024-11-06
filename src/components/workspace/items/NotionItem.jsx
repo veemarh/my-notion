@@ -1,7 +1,7 @@
 import RenderedItem from './RenderedItem.jsx';
 import withToggleAndModal from '../modals/ModalToggle.jsx';
 
-function NotionItem({id, type, content, setType, setContent, onDelete, onEnter}) {
+function NotionItem({id, type, content, setType, setContent, onDelete, onEnter, onPaste}) {
     return (
         <RenderedItem id={id}
                       type={type}
@@ -9,7 +9,8 @@ function NotionItem({id, type, content, setType, setContent, onDelete, onEnter})
                       setType={setType}
                       setContent={setContent}
                       onDelete={onDelete}
-                      onEnter={onEnter}/>
+                      onEnter={onEnter}
+                      onPaste={onPaste}/>
     )
 }
 

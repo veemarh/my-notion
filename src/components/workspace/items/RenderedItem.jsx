@@ -4,7 +4,7 @@ import {useCallback} from 'react';
 import sanitizeHtml from 'sanitize-html';
 import {isCaretAtEnd, getSelectionEnd, getSelectionStart, setSelectionRange} from '../utils/selection/selectionUtils.js';
 
-export default function RenderedItem({id, type, content, setContent, onDelete, onEnter}) {
+export default function RenderedItem({id, type, content, setContent, onDelete, onEnter, onPaste}) {
     const onContentChange = useCallback(evt => {
         const prevSelection = {start: getSelectionStart(evt.currentTarget), end: getSelectionEnd(evt.currentTarget)};
         const sanitizeConf = {
@@ -38,6 +38,7 @@ export default function RenderedItem({id, type, content, setContent, onDelete, o
             onContentChange(evt);
         },
         onKeyDown: onKeyDownHandler,
+        onPaste: onPaste,
     };
 
     const typeSettings = {

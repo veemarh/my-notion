@@ -1,6 +1,6 @@
 export const addBlockAfter = (evt, containerRef, items, setItems, setFocusedItemIndex) => {
     if (items.length === 0) {
-        setItems([{id: Date.now(), type: "text", content: ""}]);
+        setItems([{id: crypto.randomUUID(), type: "text", content: ""}]);
         setFocusedItemIndex(items.length);
         return;
     }
@@ -14,7 +14,7 @@ export const addBlockAfter = (evt, containerRef, items, setItems, setFocusedItem
     const containerBottom = container.children[lastItemIndex].getBoundingClientRect().bottom;
     const clickY = evt.clientY;
     if (clickY > containerBottom) {
-        const newItem = {id: Date.now(), type: "text", content: ""};
+        const newItem = {id: crypto.randomUUID(), type: "text", content: ""};
         setItems([...items, newItem]);
         setFocusedItemIndex(items.length);
     }
@@ -25,7 +25,7 @@ export const addBlockBetween = (setItems, setFocusedItemIndex, id) => {
         const index = prevItems.findIndex(item => item.id === id);
         const updatedItems = [
             ...prevItems.slice(0, index + 1),
-            {id: Date.now(), type: "text", content: ""},
+            {id: crypto.randomUUID(), type: "text", content: ""},
             ...prevItems.slice(index + 1),
         ];
         setFocusedItemIndex(index + 1);
@@ -61,6 +61,7 @@ export const deleteBlock = (setItems, setFocusedItemIndex, id) => {
     });
 };
 
+document.body.createTextRange = undefined;
 export const focusOnBlock = (items, index) => {
     if (index >= 0 && index < items.length) {
         const targetId = `notion-item-${items[index].id}`;
