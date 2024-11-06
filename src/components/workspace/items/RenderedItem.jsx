@@ -4,6 +4,7 @@ import {useCallback} from 'react';
 import sanitizeHtml from 'sanitize-html';
 import {
     isCaretAtEnd,
+    isCaretAtStart,
     getSelectionEnd,
     getSelectionStart,
     setSelectionRange,
@@ -44,9 +45,15 @@ export default function RenderedItem({id, type, content, setContent, onDelete, o
                 setContent(beforeCaretText);
                 onEnter(afterCaretText);
             }
-        } else if (evt.key === "Backspace" && evt.currentTarget.textContent === "") {
-            evt.preventDefault();
-            onDelete();
+        } else if (evt.key === "Backspace") {
+            const elem = evt.target;
+            if (elem.textContent === "") {
+                evt.preventDefault();
+                onDelete();
+            } else if (isCaretAtStart(elem)) {
+                evt.preventDefault();
+                onDelete(elem.textContent);
+            }
         }
     };
 
