@@ -1,6 +1,6 @@
 import styles from '../../../assets/css/Transition.module.css';
 import {forwardRef} from 'react';
-import withTransition from '../transition/withTransition.jsx';
+import withTransition from '../utils/hoc/withTransition.jsx';
 import styled from 'styled-components';
 
 const ToggleButton = forwardRef(({onClick}, ref) => {

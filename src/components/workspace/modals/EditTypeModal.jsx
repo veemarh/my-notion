@@ -55,8 +55,8 @@ export default function EditTypeModal({setType, onClose}) {
                 <EditTypeItem type="header" onClick={handleClick}/>
                 <EditTypeItem type="subHeader" onClick={handleClick}/>
                 <EditTypeItem type="subSubHeader" onClick={handleClick}/>
-                <EditTypeItem type="quote"/>
-                <EditTypeItem type="callout"/>
+                <EditTypeItem type="quote" onClick={handleClick}/>
+                <EditTypeItem type="callout" onClick={handleClick}/>
             </StyledList>
             <StyledButton onClick={onClose}>Close</StyledButton>
         </StyledMenu>

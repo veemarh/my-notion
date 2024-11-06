@@ -2,7 +2,7 @@ import {createPortal} from 'react-dom';
 import {forwardRef} from 'react';
 import styled from 'styled-components';
 import styles from '../../../assets/css/Transition.module.css';
-import withTransition from '../transition/withTransition.jsx';
+import withTransition from '../utils/hoc/withTransition.jsx';
 
 const Modal = forwardRef(({modal, onClose, position}, ref) => {
     const modalPositionStyles = {

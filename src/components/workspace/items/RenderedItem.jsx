@@ -2,7 +2,7 @@ import styles from '../../../assets/css/Contents.module.css';
 import {EditableItem} from './Items.jsx';
 import {useCallback} from 'react';
 import sanitizeHtml from 'sanitize-html';
-import {isCaretAtEnd, getSelectionEnd, getSelectionStart, setSelectionRange} from '../selection/Selection.js';
+import {isCaretAtEnd, getSelectionEnd, getSelectionStart, setSelectionRange} from '../utils/selection/selectionUtils.js';
 
 export default function RenderedItem({id, type, content, setContent, onDelete, onEnter}) {
     const onContentChange = useCallback(evt => {
