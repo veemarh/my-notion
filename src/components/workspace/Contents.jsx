@@ -14,13 +14,13 @@ import {getClipboardData} from './utils/paste/pasteUtils.js';
 
 export default function Contents() {
     const [items, setItems] = useState(ITEMS);
-    const [focusedItemIndex, setFocusedItemIndex] = useState(null);
+    const [focusedItemIndex, setFocusedItemIndex] = useState({index: null, caretPosition: false});
     const containerRef = useRef(null);
 
     useEffect(() => {
-        if (focusedItemIndex !== null) {
-            focusOnBlock(items, focusedItemIndex);
-            setFocusedItemIndex(null);
+        if (focusedItemIndex.index !== null) {
+            focusOnBlock(items, focusedItemIndex.index, focusedItemIndex.caretPosition);
+            setFocusedItemIndex({index: null, caretPosition: false});
         }
     }, [items, focusedItemIndex]);
 
@@ -30,7 +30,7 @@ export default function Contents() {
                     setType={(newType) => updateType(setItems, item.id, newType)}
                     setContent={(newContent) => updateContent(setItems, item.id, newContent)}
                     onDelete={() => deleteBlock(setItems, setFocusedItemIndex, item.id)}
-                    onEnter={() => addBlockBetween(setItems, setFocusedItemIndex, item.id)}
+                    onEnter={(content) => addBlockBetween(setItems, setFocusedItemIndex, item.id, content)}
                     onPaste={(evt) => getClipboardData(evt, setItems, setFocusedItemIndex, item.id)}/>
     ));
 

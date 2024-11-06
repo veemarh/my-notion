@@ -5,7 +5,7 @@ function getTextLength(elem) {
     return range.toString().length;
 }
 
-function getCaretOffset(elem) {
+export function getCaretOffset(elem) {
     let sel = elem.ownerDocument.defaultView.getSelection();
     if (sel.rangeCount === 0) return 0;
 

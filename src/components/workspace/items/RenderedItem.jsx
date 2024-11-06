@@ -2,7 +2,13 @@ import styles from '../../../assets/css/Contents.module.css';
 import {EditableItem} from './Items.jsx';
 import {useCallback} from 'react';
 import sanitizeHtml from 'sanitize-html';
-import {isCaretAtEnd, getSelectionEnd, getSelectionStart, setSelectionRange} from '../utils/selection/selectionUtils.js';
+import {
+    isCaretAtEnd,
+    getSelectionEnd,
+    getSelectionStart,
+    setSelectionRange,
+    getCaretOffset
+} from '../utils/selection/selectionUtils.js';
 
 export default function RenderedItem({id, type, content, setContent, onDelete, onEnter, onPaste}) {
     const onContentChange = useCallback(evt => {
@@ -19,10 +25,24 @@ export default function RenderedItem({id, type, content, setContent, onDelete, o
     }, [setContent]);
 
     const onKeyDownHandler = (evt) => {
-        if (evt.key === "Enter") {
-            if (isCaretAtEnd(evt.target)) {
-                evt.preventDefault();
+        if (evt.key === "Enter" && !evt.shiftKey) {
+            evt.preventDefault();
+            const elem = evt.target;
+
+            if (isCaretAtEnd(elem)) {
                 onEnter();
+            } else {
+                const selection = window.getSelection();
+                selection.deleteFromDocument();
+                selection.collapseToEnd();
+
+                const caretOffset = getCaretOffset(elem);
+                const fullText = elem.textContent;
+                const beforeCaretText = fullText.slice(0, caretOffset);
+                const afterCaretText = fullText.slice(caretOffset);
+
+                setContent(beforeCaretText);
+                onEnter(afterCaretText);
             }
         } else if (evt.key === "Backspace" && evt.currentTarget.textContent === "") {
             evt.preventDefault();

@@ -48,7 +48,7 @@ export async function getClipboardData(evt, setItems, setFocusedItemIndex, id) {
                 ...prevItems.slice(index + 1 + i),
             ];
             if (i === parsedHTML.children.length - 1) {
-                setFocusedItemIndex(index + 1 + i);
+                setFocusedItemIndex({index: index + 1 + i, caretPosition: false});
             }
             return updatedIndex;
         });
