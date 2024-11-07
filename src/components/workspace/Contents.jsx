@@ -17,6 +17,40 @@ export default function Contents() {
     const [focusedItemIndex, setFocusedItemIndex] = useState({index: null, caretPosition: "end"});
     const containerRef = useRef(null);
 
+    const handleEnter = (itemId, content) => {
+        setItems(prevItems => {
+            const [updatedItems, newFocusIndex, newCaretPosition] = addBlockBetween(prevItems, itemId, content);
+            setFocusedItemIndex({index: newFocusIndex, caretPosition: newCaretPosition});
+            return updatedItems;
+        });
+    };
+
+    const handleDelete = (itemId, content) => {
+        setItems(prevItems => {
+            const [updatedItems, newFocusIndex, newCaretPosition] = deleteBlock(prevItems, itemId, content);
+            setFocusedItemIndex({index: newFocusIndex, caretPosition: newCaretPosition});
+            return updatedItems;
+        });
+    };
+
+    const handleAddAfter = (evt) => {
+        setItems(prevItems => {
+            const [updatedItems, updatedFocusedIndex, updatedCaretPosition] = addBlockAfter(evt, containerRef, prevItems);
+            if (updatedItems && updatedFocusedIndex && updatedCaretPosition) {
+                setFocusedItemIndex({index: updatedFocusedIndex, caretPosition: updatedCaretPosition});
+                return updatedItems;
+            }
+            return prevItems;
+        });
+    };
+
+    const handleSetType = (itemId, newType) => {
+        setItems(prevItems => updateType(prevItems, itemId, newType));
+    }
+    const handleSetContent = (itemId, newContent) => {
+        setItems(prevItems => updateContent(prevItems, itemId, newContent));
+    }
+
     useEffect(() => {
         if (focusedItemIndex.index !== null) {
             focusOnBlock(items, focusedItemIndex.index, focusedItemIndex.caretPosition);
@@ -27,17 +61,17 @@ export default function Contents() {
     const notionItems = items.map((item) => (
         <NotionItem key={item.id} id={`notion-item-${item.id}`}
                     type={item.type} content={item.content}
-                    setType={(newType) => updateType(setItems, item.id, newType)}
-                    setContent={(newContent) => updateContent(setItems, item.id, newContent)}
-                    onDelete={(content) => deleteBlock(setItems, setFocusedItemIndex, item.id, content)}
-                    onEnter={(content) => addBlockBetween(setItems, setFocusedItemIndex, item.id, content)}
+                    setType={(newType) => handleSetType(item.id, newType)}
+                    setContent={(newContent) => handleSetContent(item.id, newContent)}
+                    onDelete={(content) => handleDelete(item.id, content)}
+                    onEnter={(content) => handleEnter(item.id, content)}
                     onPaste={(evt) => getClipboardData(evt, setItems, setFocusedItemIndex, item.id)}/>
     ));
 
     return (
         <div ref={containerRef}
              className={styles.container}
-             onClick={(evt) => addBlockAfter(evt, containerRef, items, setItems, setFocusedItemIndex)}>
+             onClick={(evt) => handleAddAfter(evt)}>
             {notionItems}
             {/*<Link to="/register">register</Link>*/}
             {/*<Link to="/login">login</Link>*/}
@@ -47,13 +81,13 @@ export default function Contents() {
 };
 
 const ITEMS = [
-    {id: 1, type: "header", content: "Header"},
-    {id: 2, type: "text", content: "Ganymede, Marc-Antoine Barrois."},
-    {id: 3, type: "subHeader", content: "Sub header"},
-    {id: 4, type: "text", content: "Группа: древесные пряные. Сезонность: круглый год."},
-    {id: 5, type: "subSubHeader", content: "Sub sub header"},
+    {id: "1", type: "header", content: "Header"},
+    {id: "2", type: "text", content: "Ganymede, Marc-Antoine Barrois."},
+    {id: "3", type: "subHeader", content: "Sub header"},
+    {id: "4", type: "text", content: "Группа: древесные пряные. Сезонность: круглый год."},
+    {id: "5", type: "subSubHeader", content: "Sub sub header"},
     {
-        id: 6,
+        id: "6",
         type: "quote",
         content: "Нанесение: Я бы посоветовала нанести сначала намазом (раскрутить флакончик, мазнуть трубочкой по " +
             "запястью). Нельзя подносить к носу сразу после нанесения - может отключить в носу рецепторы на минут " +
@@ -63,5 +97,5 @@ const ITEMS = [
             "искусственности. Он таким задумывался. К нему нужно немного привыкнуть и дать несколько шансов, " +
             "чтобы не ошибиться."
     },
-    {id: 7, type: "callout", content: "callout"},
+    {id: "7", type: "callout", content: "callout"},
 ];
