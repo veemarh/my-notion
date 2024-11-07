@@ -11,7 +11,7 @@ import {
     getCaretOffset
 } from '../utils/selection/selectionUtils.js';
 
-export default function RenderedItem({id, type, content, setContent, onDelete, onEnter, onPaste}) {
+export default function RenderedItem({id, type, content, setContent, onBackspace, onDelete, onEnter, onPaste}) {
     const onContentChange = useCallback(evt => {
         const prevSelection = {start: getSelectionStart(evt.currentTarget), end: getSelectionEnd(evt.currentTarget)};
         const sanitizeConf = {
@@ -49,10 +49,16 @@ export default function RenderedItem({id, type, content, setContent, onDelete, o
             const elem = evt.target;
             if (elem.textContent === "") {
                 evt.preventDefault();
-                onDelete();
+                onBackspace();
             } else if (isCaretAtStart(elem)) {
                 evt.preventDefault();
-                onDelete(elem.textContent);
+                onBackspace(elem.textContent);
+            }
+        } else if (evt.key === "Delete") {
+            const elem = evt.target;
+            if (isCaretAtEnd(elem)) {
+                evt.preventDefault();
+                onDelete();
             }
         }
     };

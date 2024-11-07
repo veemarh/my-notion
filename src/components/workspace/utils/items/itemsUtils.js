@@ -43,7 +43,7 @@ export const updateContent = (prevItems, id, newContent) => {
     );
 };
 
-export const deleteBlock = (prevItems, id, content) => {
+export const backspaceBlock = (prevItems, id, content) => {
     const index = prevItems.findIndex(item => item.id === id);
     if (index === -1 || index === 0 && content) {
         return [prevItems, 0, "start"];
@@ -62,6 +62,26 @@ export const deleteBlock = (prevItems, id, content) => {
             ? content
                 ? {...item, content: prevItems[tempFocusIndex].content + content}
                 : item
+            : item
+        );
+    return [updatedItems, updatedIndex, updatedCaretPosition];
+};
+
+export const deleteBlock = (prevItems, id) => {
+    const index = prevItems.findIndex(item => item.id === id);
+    const lastItemIndex = prevItems.length - 1;
+    if (index >= lastItemIndex) {
+        return [prevItems, lastItemIndex, "end"];
+    }
+
+    const [updatedIndex, updatedCaretPosition] = [index, prevItems[index].content.length];
+    const deletingItem = prevItems[index + 1];
+    const removingContent = deletingItem.content;
+
+    const updatedItems = prevItems
+        .filter(item => item.id !== deletingItem.id)
+        .map(item => item.id === id
+            ? {...item, content: item.content + removingContent}
             : item
         );
     return [updatedItems, updatedIndex, updatedCaretPosition];

@@ -6,6 +6,7 @@ import {
     addBlockAfter,
     addBlockBetween,
     deleteBlock,
+    backspaceBlock,
     focusOnBlock,
     updateContent,
     updateType
@@ -25,9 +26,17 @@ export default function Contents() {
         });
     };
 
-    const handleDelete = (itemId, content) => {
+    const handleBackspace = (itemId, content) => {
         setItems(prevItems => {
-            const [updatedItems, newFocusIndex, newCaretPosition] = deleteBlock(prevItems, itemId, content);
+            const [updatedItems, newFocusIndex, newCaretPosition] = backspaceBlock(prevItems, itemId, content);
+            setFocusedItemIndex({index: newFocusIndex, caretPosition: newCaretPosition});
+            return updatedItems;
+        });
+    };
+
+    const handleDelete = (itemId) => {
+        setItems(prevItems => {
+            const [updatedItems, newFocusIndex, newCaretPosition] = deleteBlock(prevItems, itemId);
             setFocusedItemIndex({index: newFocusIndex, caretPosition: newCaretPosition});
             return updatedItems;
         });
@@ -63,7 +72,8 @@ export default function Contents() {
                     type={item.type} content={item.content}
                     setType={(newType) => handleSetType(item.id, newType)}
                     setContent={(newContent) => handleSetContent(item.id, newContent)}
-                    onDelete={(content) => handleDelete(item.id, content)}
+                    onBackspace={(content) => handleBackspace(item.id, content)}
+                    onDelete={() => handleDelete(item.id)}
                     onEnter={(content) => handleEnter(item.id, content)}
                     onPaste={(evt) => getClipboardData(evt, setItems, setFocusedItemIndex, item.id)}/>
     ));
