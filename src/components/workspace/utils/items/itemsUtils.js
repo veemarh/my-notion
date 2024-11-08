@@ -1,4 +1,10 @@
-import {setSelectionRange} from '../selection/selectionUtils.js';
+import {
+    getCaretOffset,
+    isCaretAtEnd,
+    isCaretAtStart,
+    isCaretOnFirstLine, isCaretOnLastLine,
+    setSelectionRange
+} from '../selection/selectionUtils.js';
 
 export const addBlockAfter = (evt, containerRef, prevItems) => {
     if (prevItems.length === 0) {
@@ -86,6 +92,24 @@ export const deleteBlock = (prevItems, id) => {
         );
     return [updatedItems, updatedIndex, updatedCaretPosition];
 };
+
+export const arrowClick = (evt, items, id) => {
+    const index = items.findIndex(item => item.id === id);
+    const caretPosition = getCaretOffset(evt.target);
+    if (evt.key === "ArrowUp" && index > 0 && (isCaretOnFirstLine(evt.target) || isCaretAtStart(evt.target))) {
+        const targetPos = Math.min(items[index - 1].content.length, caretPosition);
+        return [index - 1, targetPos];
+    } else if (evt.key === "ArrowDown" && index < items.length - 1 && (isCaretOnLastLine(evt.target) || isCaretAtEnd(evt.target))) {
+        const targetPos = Math.min(items[index + 1].content.length, caretPosition);
+        return [index + 1, targetPos];
+    } else if (evt.key === "ArrowRight" && isCaretAtEnd(evt.target) && index < items.length - 1) {
+        return [index + 1, "start"];
+    } else if (evt.key === "ArrowLeft" && caretPosition === 0 && index > 0) {
+        return [index - 1, "end"];
+    } else {
+        return [null, null];
+    }
+}
 
 document.body.createTextRange = undefined;
 export const focusOnBlock = (items, index, position = "end") => {

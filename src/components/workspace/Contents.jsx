@@ -9,7 +9,8 @@ import {
     backspaceBlock,
     focusOnBlock,
     updateContent,
-    updateType
+    updateType,
+    arrowClick
 } from './utils/items/itemsUtils.js';
 import {getClipboardData} from './utils/paste/pasteUtils.js';
 
@@ -17,6 +18,17 @@ export default function Contents() {
     const [items, setItems] = useState(ITEMS);
     const [focusedItemIndex, setFocusedItemIndex] = useState({index: null, caretPosition: "end"});
     const containerRef = useRef(null);
+
+    const handleArrowClick = (evt, id) => {
+        setItems((prevItems) => {
+            const [newFocusIndex, newCaretPosition] = arrowClick(evt, prevItems, id);
+            if (newFocusIndex !== null) {
+                evt.preventDefault();
+                setFocusedItemIndex({index: newFocusIndex, caretPosition: newCaretPosition});
+            }
+            return prevItems;
+        });
+    }
 
     const handleEnter = (itemId, content) => {
         setItems(prevItems => {
@@ -75,6 +87,7 @@ export default function Contents() {
                     onBackspace={(content) => handleBackspace(item.id, content)}
                     onDelete={() => handleDelete(item.id)}
                     onEnter={(content) => handleEnter(item.id, content)}
+                    onArrowClick={(evt) => handleArrowClick(evt, item.id)}
                     onPaste={(evt) => getClipboardData(evt, setItems, setFocusedItemIndex, item.id)}/>
     ));
 

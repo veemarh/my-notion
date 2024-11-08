@@ -30,6 +30,49 @@ export function isCaretAtStart(elem) {
     return getCaretOffset(elem) === 0;
 }
 
+export function isCaretOnFirstLine(element) {
+    if (element.ownerDocument.activeElement !== element) return false
+    let window = element.ownerDocument.defaultView
+    let selection = window.getSelection()
+    if (selection.rangeCount === 0) return false
+    let originalCaretRange = selection.getRangeAt(0)
+    if (originalCaretRange.toString().length > 0) return false
+    let originalCaretRect = originalCaretRange.getBoundingClientRect()
+    let startOfElementRange = element.ownerDocument.createRange()
+    startOfElementRange.selectNodeContents(element)
+    let startContainer = startOfElementRange.endContainer
+    let startOffset = 0
+    while (startContainer.hasChildNodes() && !(startContainer instanceof Text)) {
+        startContainer = startContainer.firstChild
+    }
+    startOfElementRange.setStart(startContainer, startOffset)
+    startOfElementRange.setEnd(startContainer, startOffset)
+    let endOfElementRect = startOfElementRange.getBoundingClientRect()
+    return originalCaretRect.top === endOfElementRect.top
+}
+
+export function isCaretOnLastLine(element) {
+    if (element.ownerDocument.activeElement !== element) return false
+    let window = element.ownerDocument.defaultView
+    let selection = window.getSelection()
+    if (selection.rangeCount === 0) return false
+    let originalCaretRange = selection.getRangeAt(0)
+    if (originalCaretRange.toString().length > 0) return false
+    let originalCaretRect = originalCaretRange.getBoundingClientRect()
+    let endOfElementRange = document.createRange()
+    endOfElementRange.selectNodeContents(element)
+    let endContainer = endOfElementRange.endContainer
+    let endOffset = 0
+    while (endContainer.hasChildNodes() && !(endContainer instanceof Text)) {
+        endContainer = endContainer.lastChild
+        endOffset = endContainer.length ?? 0
+    }
+    endOfElementRange.setEnd(endContainer, endOffset)
+    endOfElementRange.setStart(endContainer, endOffset)
+    let endOfElementRect = endOfElementRange.getBoundingClientRect()
+    return originalCaretRect.bottom === endOfElementRect.bottom
+}
+
 export function getSelectionStart(contenteditable) {
     const selection = window.getSelection();
     const c = compareCaretPositions(selection.anchorNode, selection.anchorOffset, selection.focusNode, selection.focusOffset);

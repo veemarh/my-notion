@@ -11,7 +11,17 @@ import {
     getCaretOffset
 } from '../utils/selection/selectionUtils.js';
 
-export default function RenderedItem({id, type, content, setContent, onBackspace, onDelete, onEnter, onPaste}) {
+export default function RenderedItem({
+                                         id,
+                                         type,
+                                         content,
+                                         setContent,
+                                         onBackspace,
+                                         onDelete,
+                                         onEnter,
+                                         onArrowClick,
+                                         onPaste
+                                     }) {
     const onContentChange = useCallback(evt => {
         const prevSelection = {start: getSelectionStart(evt.currentTarget), end: getSelectionEnd(evt.currentTarget)};
         const sanitizeConf = {
@@ -60,6 +70,8 @@ export default function RenderedItem({id, type, content, setContent, onBackspace
                 evt.preventDefault();
                 onDelete();
             }
+        } else if (["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft"].includes(evt.key)) {
+            onArrowClick(evt);
         }
     };
 
