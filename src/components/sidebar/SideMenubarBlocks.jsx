@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import {useContext, useRef, useState} from 'react'
 import styles from '../../assets/css/SidebarBlocks.module.css'
 import BarToggle from './BarToggle.jsx';
 import {SideMenubarContext} from '../../contexts/SideMenubarContext';
@@ -6,15 +6,36 @@ import SideMenubarItems from './SideMenubarItems.jsx';
 import Scroller from '../scroller/Scroller.jsx';
 import {PAGES, SETTINGS} from '../../../consts/pages.jsx';
 import {OverflowBlock} from '../workspace/text-overflow/OverflowBlock.jsx';
+import ModalWithTransition from '../workspace/modals/Modal.jsx';
+import EditUserSettingsModal from '../workspace/modals/EditUserSettingsModal.jsx';
 
 export default function SideMenubarBlocks({username}) {
     const {isFixed} = useContext(SideMenubarContext);
+    const [showModal, setShowModal] = useState(false);
+    const [modalPosition, setModalPosition] = useState(null);
+    const modalRef = useRef(null);
+
+    const handleModalClose = (evt) => {
+        if (evt.currentTarget === evt.target) {
+            setShowModal(false);
+        }
+    }
+    const handleModalOpen = (evt) => {
+        const rect = evt.currentTarget.getBoundingClientRect();
+        setModalPosition({
+            top: rect.y,
+            left: rect.x,
+            height: rect.height,
+            width: rect.width,
+        });
+        setShowModal(true);
+    }
 
     return (
         <>
             <div className={styles.outside}>
                 <div className={styles.itemOuterOutside}>
-                    <div className={styles.itemInner}>
+                    <div className={styles.itemInner} onClick={handleModalOpen}>
                         <div className={styles.icon}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path
@@ -47,6 +68,13 @@ export default function SideMenubarBlocks({username}) {
                     </div>
                 </div>
             </div>
+            <ModalWithTransition
+                ref={modalRef}
+                in={showModal}
+                modal={<EditUserSettingsModal onClose={handleModalClose}/>}
+                onClose={handleModalClose}
+                position={modalPosition}
+            />
         </>
     )
 }
